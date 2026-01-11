@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem;
+  border-radius: 40px;
+  height: 100%;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 20;
+  /* Balanced blur for premium frosted effect */
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+}
+
+/* --- THEME WRAPPERS --- */
+
+/* Light Mode: High-Contrast Frosted White */
+.sidebar-container.is-light {
+  background: rgba(255, 255, 255, 0.95) ; 
+  border: 1px solid rgba(0, 0, 0, 0.12) ;
+  color: #0f172a ; /* Deep Slate for maximum readability */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* Dark Mode: Premium Deep Glass */
+.sidebar-container.is-dark {
+  background: rgba(10, 11, 13, 0.9) ;
+  border: 1px solid rgba(255, 255, 255, 0.15) ;
+  color: #ffffff ;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* --- NAVIGATION ITEMS --- */
+
+.nav-item-glass {
+  @apply flex items-center gap-3 p-4 rounded-xl font-bold cursor-pointer transition-all duration-300;
+}
+
+/* Inactive State: High visibility */
+.is-light .nav-item-glass:not(.bg-cyan-500\/15) {
+  @apply text-slate-600 opacity-90; 
+}
+
+.is-light .nav-item-glass:not(.bg-cyan-500\/15):hover {
+  @apply bg-black/5 opacity-100 text-slate-900;
+}
+
+.is-dark .nav-item-glass:not(.bg-cyan-500\/15) {
+  @apply text-slate-200 opacity-80; 
+}
+
+.is-dark .nav-item-glass:not(.bg-cyan-500\/15):hover {
+  @apply bg-white/10 opacity-100 text-white;
+}
+
+/* Active State Styling: Maximum visibility */
+.nav-item-glass.bg-cyan-500\/15 {
+  @apply text-cyan-600 border border-cyan-500/40 shadow-sm opacity-100 ;
+  background: rgba(6, 182, 212, 0.15) ;
+  backdrop-filter: blur(4px);
+}
+
+.is-dark .nav-item-glass.bg-cyan-500\/15 {
+  @apply text-cyan-400 border-cyan-400/30 ;
+  background: rgba(34, 211, 238, 0.1) ;
+}
+
+/* --- THEME TOGGLE SWITCH --- */
+
+.theme-toggle-switch {
+  @apply flex items-center justify-between p-4 rounded-2xl cursor-pointer border transition-all duration-300 mt-auto;
+}
+
+.is-light .theme-toggle-switch {
+  @apply bg-black/5 border-black/10;
+}
+
+.is-dark .theme-toggle-switch {
+  @apply bg-white/5 border-white/10;
+}
+
+.theme-toggle-switch:hover {
+  @apply border-cyan-500/50 shadow-lg shadow-cyan-500/5;
+}
+
+/* --- TYPOGRAPHY & TAGS --- */
+
+.sidebar-container h2 {
+  @apply tracking-tighter text-2xl font-black;
+}
+
+.sidebar-container .status-tag {
+  @apply font-mono text-[10px] tracking-widest uppercase mt-1 opacity-90 font-bold; 
+}

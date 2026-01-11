@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  /* Removed text-align: center to allow grid/flex layouts to function correctly */
+}
+
+@layer base {
+  :root {
+    --neon-blue: #00f2fe;
+  }
+
+  body {
+    @apply m-0 p-0 overflow-hidden;
+    transition: background-color 0.8s ease;
+  }
+}
+
+@layer components {
+  /* Glass Foundations */
+  .glass-panel {
+    @apply backdrop-blur-[30px] backdrop-saturate-[150%];
+  }
+
+  .theme-transition {
+    transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.6s ease, 
+                border-color 0.6s ease, 
+                box-shadow 0.6s ease;
+  }
+
+  .iris-protection {
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), 
+                opacity 0.6s ease, 
+                filter 0.6s ease;
+  }
+
+  /* --- Diagnostic Button Base Styles --- */
+  .diagnostic-option-btn {
+    @apply block w-full text-left p-[1.75rem] rounded-[18px] border border-solid 
+           backdrop-blur-[12px] relative overflow-hidden cursor-pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .option-label {
+    @apply block font-mono text-[10px] uppercase tracking-[2px] mb-[0.25rem] opacity-[0.45];
+    transition: all 0.3s ease;
+  }
+
+  .option-text {
+    @apply block font-medium text-[0.9rem] tracking-[0.05em] uppercase;
+    transition: all 0.3s ease;
+  }
+
+  /* --- LIGHT MODE: High-Contrast Frosted White --- */
+  .is-light .diagnostic-option-btn {
+    @apply bg-white/75 border-black/5 text-slate-900 shadow-sm;
+  }
+
+  .is-light .diagnostic-option-btn:hover {
+    @apply bg-white/95 border-[var(--neon-blue)] -translate-y-1 shadow-lg;
+  }
+
+  /* --- DARK MODE: Enhanced Premium Glass --- */
+  .is-dark .diagnostic-option-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #f8fafc;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .is-dark .diagnostic-option-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 242, 254, 0.5);
+    @apply -translate-y-1 shadow-[0_0_20px_rgba(0,242,254,0.15)];
+  }
+
+  /* --- Universal Hover States --- */
+  .diagnostic-option-btn:hover .option-text {
+    color: var(--neon-blue);
+  }
+
+  .diagnostic-option-btn:hover .option-label {
+    @apply opacity-100;
+    color: var(--neon-blue);
+  }
+}
+
+@layer utilities {
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+}
+
+/* Futuristic Scrollbar Utility */
+.futuristic-scrollbar::-webkit-scrollbar {
+width: 5px;
+height: 5px;
+}
+
+.futuristic-scrollbar::-webkit-scrollbar-track {
+background: rgba(255, 255, 255, 0.02);
+border-radius: 10px;
+}
+
+.futuristic-scrollbar::-webkit-scrollbar-thumb {
+background: linear-gradient(to bottom, #06b6d4, #8b5cf6);
+border-radius: 10px;
+box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+.futuristic-scrollbar::-webkit-scrollbar-thumb:hover {
+background: #22d3ee;
+}
+
+/* For Firefox */
+.futuristic-scrollbar {
+scrollbar-width: thin;
+scrollbar-color: #06b6d4 rgba(255, 255, 255, 0.02);
+}
+
+/* Light mode overrides for scrollbar */
+.is-light .futuristic-scrollbar::-webkit-scrollbar-track {
+background: rgba(0, 0, 0, 0.05);
+}
+
+.is-light .futuristic-scrollbar::-webkit-scrollbar-thumb {
+background: #0891b2;
+}
